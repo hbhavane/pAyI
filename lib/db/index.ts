@@ -14,7 +14,7 @@ class InMemoryDB {
 
   // User operations
   createUser(email: string, name: string, hashedPassword: string): User {
-    const id = `user_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    const id = `user_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
     const user: User & { password: string } = {
       id,
       email,
@@ -59,7 +59,7 @@ class InMemoryDB {
   // User card operations
   addUserCard(userId: string, cardId: string, nickname?: string): UserCard {
     const userCard: UserCard = {
-      id: `uc_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+      id: `uc_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`,
       userId,
       cardId,
       nickname,

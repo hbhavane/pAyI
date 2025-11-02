@@ -50,8 +50,9 @@ export class RecommendationEngine {
     card: CreditCard,
     offers: CardOffer[],
     merchantCategory: string,
-    transactionAmount: number = 100
+    transactionAmount?: number
   ): CardRecommendation {
+    const amount = transactionAmount ?? 100;
     let bestOffer: CardOffer | undefined;
     let maxRewardsRate = card.baseRewardsRate;
     let reason = `Base ${card.baseRewardsRate}% rewards`;
@@ -75,12 +76,12 @@ export class RecommendationEngine {
     }
 
     // Calculate expected reward
-    const expectedReward = (transactionAmount * maxRewardsRate) / 100;
+    const expectedReward = (amount * maxRewardsRate) / 100;
 
     // Calculate score using multiple factors
     const factors: ScoringFactors = {
       rewardsRate: maxRewardsRate,
-      annualFeeFactor: this.calculateAnnualFeeFactor(card.annualFee, transactionAmount),
+      annualFeeFactor: this.calculateAnnualFeeFactor(card.annualFee, amount),
       categoryMatch: bestOffer ? 1.2 : 1.0,
       baseRewards: card.baseRewardsRate,
     };

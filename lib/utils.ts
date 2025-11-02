@@ -37,7 +37,7 @@ export function isNearby(
   userLon: number,
   merchantLat: number,
   merchantLon: number,
-  radiusMeters: number = 100
+  radiusMeters: number = 1000
 ): boolean {
   const distance = calculateDistance(userLat, userLon, merchantLat, merchantLon);
   return distance <= radiusMeters;
